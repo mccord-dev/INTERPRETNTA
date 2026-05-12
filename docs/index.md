@@ -159,7 +159,7 @@ Studies with more than one blank type should decide which blank(s) should be use
 
 The QA/QC filtering logic described in the [INTERPRET NTA Logic] below relies on the use of both blank and sample replicates to perform replicate threshold, coefficient of variation (CV), and MRL filtering, as well as blank subtraction. Replicate data may arise from the collection of multiple samples from a single source during sample collection (*sample replicates*), the preparation of multiple extracts from a single sample during sample preparation (*preparation replicates*), or, from repeated injection and acquisition of a single extract during data acquisition (*analytical replicates* or *injection replicates*).
 
-**INTERPRET NTA users must include, at minimum, three analytical replicates per sample and blank.** If replicate analysis occurs across multiple analytical batches, users are encouraged to include replicates across batches and to randomize replicates within each batch. The use of analytical batches and the randomization of samples is described in more detail in the [ENTAiLS Toolkit.](https://whitehead-heather.github.io/ENTAiLSToolkit/#content)
+**INTERPRET NTA users must include, at minimum, two analytical replicates per sample and blank.** If replicate analysis occurs across multiple analytical batches, users are encouraged to include replicates across batches and to randomize replicates within each batch. The use of analytical batches and the randomization of samples is described in more detail in the [ENTAiLS Toolkit.](https://whitehead-heather.github.io/ENTAiLSToolkit/#content)
 
 > **Summary**\
 > An analytical batch can be defined as a set of study and QA/QC samples analyzed together on an instrument. Small studies may have few enough samples that all study and QA/QC samples can be analyzed within a single analytical batch. However, it is common for studies to require multiple analytical batches spread across days, weeks, or months, and the use of analytical batches can ensure that instrument/signal drift is minimized, giving sufficient “down time’ where calibration and routine maintenance can be performed. Instrument performance can be tracked between batches using QA/QC samples and elements (e.g., spiked standards, controls). Randomizing the order of which samples are injected within and across these batches can be helpful to minimize performance effects for entire groups of similar study or QA/QC samples.
@@ -350,12 +350,12 @@ Input MS1 parameters are set on the MS1 Data Processing Workflow page of AMOS, f
   <tr grouplength="5"><td colspan="3" style="background-color: #0668b3; color: #fff;"><strong>Input Files</strong></td></tr>
 <tr>
    <td style="text-align:center;padding-left: 2em;" indentlevel="1"> Positive mode file: </td>
-   <td style="text-align:center;"> "Choose file" button that opens dialog box to direct to a file location. Input file needs to be a .csv file type. Input file here should be for any positive mode detection matrix. Mandatory file </td>
+   <td style="text-align:center;"> "Choose file" button that opens dialog box to direct to a file location. Input file needs to be a .csv file type. Input file here should be for any positive mode detection matrix. **Mandatory file** </td>
    <td style="text-align:center;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:center;padding-left: 2em;" indentlevel="1"> Negative mode file: </td>
-   <td style="text-align:center;"> "Choose file" button that opens dialog box to direct to a file location. Input file needs to be a .csv file type. Input file here should be for any negative mode detection matrix. Mandatory file </td>
+   <td style="text-align:center;"> "Choose file" button that opens dialog box to direct to a file location. Input file needs to be a .csv file type. Input file here should be for any negative mode detection matrix. **Mandatory file** </td>
    <td style="text-align:center;"> NA </td>
   </tr>
   <tr>
@@ -376,7 +376,7 @@ Input MS1 parameters are set on the MS1 Data Processing Workflow page of AMOS, f
   <tr grouplength="2"><td colspan="3" style="background-color: #0668b3; color: #fff;"><strong>Data Filtering</strong></td></tr>
 <tr>
    <td style="text-align:center;padding-left: 2em;" indentlevel="1"> Input matrix non-detect value: </td>
-   <td style="text-align:center;"> Open text field input. Should be the number or character that represents all non-detects in the input negative and positive mode files. (e.g., “0” if all non-detect cells have a 0, or a empty call if all non-detect cells are empty) </td>
+   <td style="text-align:center;"> Open text field input. Should be the number or character that represents all non-detects in the input negative and positive mode files. (e.g., “0” if all non-detect cells have a 0, or left empty if all non-detect cells are empty) </td>
    <td style="text-align:center;">  </td>
   </tr>
   <tr>
@@ -458,12 +458,17 @@ Input MS1 parameters are set on the MS1 Data Processing Workflow page of AMOS, f
    <td style="text-align:center;"> 0.8 </td>
   </tr>
   <tr>
+   <td style="text-align:center;padding-left: 2em;" indentlevel="1"> Filter on CV values? </td>
+   <td style="text-align:center;"> Yes/no drop down. This allows users to choose if they want to filter based on CV. </td>
+   <td style="text-align:center;"> Yes </td>
+  </tr>
+  <tr grouplength="4"><td colspan="3" style="background-color: #0668b3; color: #fff;"><strong>Database Searching</strong></td></tr>
+<tr>
    <td style="text-align:center;padding-left: 2em;" indentlevel="1"> MRL standard deviation multiplier: </td>
    <td style="text-align:center;"> Drop-down box with “3”, “5”, or “10”. The MRL for each feature represents the “minimum reporting level”. It is calculated as the mean blank abundance plus the standard deviation that has been multiplied by this scalar value. Assuming that blank detection abundances for any feature are normally distributed, multiplier values of 3, 5, and 10 allow approximation of the upper (one-tailed) 97.5th, 99.5th, and 99.9th percentile of the blank abundance distribution (assuming five replicates) </td>
    <td style="text-align:center;"> 3 </td>
   </tr>
-  <tr grouplength="4"><td colspan="3" style="background-color: #0668b3; color: #fff;"><strong>Database Searching</strong></td></tr>
-<tr>
+  <tr>
    <td style="text-align:center;padding-left: 2em;" indentlevel="1"> Parent ion mass accuracy (ppm): </td>
    <td style="text-align:center;"> Sliding bar of integers. These are numeric values that represent the mass tolerance (in ppm) used to search the estimated monoisotopic masses of features against exact masses of MS-ready structures in the Distributed Structure-Searchable Toxicity (DSSTox). database </td>
    <td style="text-align:center;"> 5 </td>
@@ -479,7 +484,7 @@ Input MS1 parameters are set on the MS1 Data Processing Workflow page of AMOS, f
    <td style="text-align:center;"> No </td>
   </tr>
   <tr>
-   <td style="text-align:center;padding-left: 2em;" indentlevel="1"> Search DSSTox by: </td>
+   <td style="text-align:center;"> Search DSSTox by: </td>
    <td style="text-align:center;"> Drop down menu that allows users to choose between "mass" (default) and "formula". When mass is selected, the masses of features that pass QA/QC are used to search the DSSTox database. When formula is selected, the molecular formula for features that pass QA/QC are used to search DSSTox. Note: a formula search requires the user to submit input files that have a “formula” column included </td>
    <td style="text-align:center;"> Mass </td>
   </tr>
@@ -537,7 +542,7 @@ INTERPRET NTA results include both visual outputs (interactive and static) and a
 <div class="alert alert-warning" role="alert">
 Loading results make take a few moments, especially for large datasets</div>
 
-The Excel output generated by INTERPRET NTA is contained within a ZIP file that can be downloaded by clicking the “Download Results File (ZIP) as shown in **Figure 2**. This file is named as “UniqueProjectName¬\_INTERPRET_NTA_QAQC.xlsx” where UniqueProjectName matches the Project Name given by the user in the input parameters. The structure and contents of this file are described in more detail in the [Excel QA/QC File] section below. Additional files in the .ZIP include static versions (as .png files) of the CV scatterplot, occurrence heatmap, and run sequence plots.
+The Excel output generated by INTERPRET NTA is contained within a ZIP file that can be downloaded by clicking the “Download Results File (ZIP) as shown in **Figure 2**. This file is named as “ProjectName¬\_INTERPRET_NTA_QAQC.xlsx” where ProjectName matches the Project Name given by the user in the input parameters. The structure and contents of this file are described in more detail in the [Excel QA/QC File] section below. Additional files in the .ZIP include static versions (as .png files) of the CV scatterplot, occurrence heatmap, and run sequence plots.
 
 An example .zip folder generated by INTERPET NTA is attached below. 
 
@@ -625,6 +630,11 @@ The output Excel file from INTERPRET NTA contains all information used to make t
   <tr>
    <td style="text-align:center;"> Analysis Parameters </td>
    <td style="text-align:center;"> Displays the user-selected or defined parameters used to run INTERPRET NTA. This includes the names of input files and the exact values of thresholds used for future refence </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> Run Sequence </td>
+   <td style="text-align:center;"> Displays the run sequence used to create tracer plots. </td>
    <td style="text-align:center;">  </td>
   </tr>
   <tr>
